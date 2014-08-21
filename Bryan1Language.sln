@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bryan1Language", "Bryan1Language.Console\Bryan1Language.csproj", "{FEABFCAA-CD87-403B-BB72-8678C0F66C64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bryan1Language.Compiler", "Bryan1Language.Compiler\Bryan1Language.Compiler.csproj", "{E7F98569-2B7A-416F-9EBA-2BC4A42CE662}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bryan1Language.Lexer", "Bryan1Language.Lexer\Bryan1Language.Lexer.csproj", "{32C4A198-585F-45A5-A084-9987E74372A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bryan1Language.Common", "Bryan1Language.Common\Bryan1Language.Common.csproj", "{09E3CE55-1405-4B7D-89BE-0DEC29D4C07F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bryan1Language.Parser", "Bryan1Language.Parser\Bryan1Language.Parser.csproj", "{6F2C2A9F-2EC9-4F0B-B4F2-BFF00949D691}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{09E3CE55-1405-4B7D-89BE-0DEC29D4C07F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{09E3CE55-1405-4B7D-89BE-0DEC29D4C07F}.Debug|x86.Build.0 = Debug|Any CPU
+		{09E3CE55-1405-4B7D-89BE-0DEC29D4C07F}.Release|x86.ActiveCfg = Release|Any CPU
+		{09E3CE55-1405-4B7D-89BE-0DEC29D4C07F}.Release|x86.Build.0 = Release|Any CPU
+		{32C4A198-585F-45A5-A084-9987E74372A4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{32C4A198-585F-45A5-A084-9987E74372A4}.Debug|x86.Build.0 = Debug|Any CPU
+		{32C4A198-585F-45A5-A084-9987E74372A4}.Release|x86.ActiveCfg = Release|Any CPU
+		{32C4A198-585F-45A5-A084-9987E74372A4}.Release|x86.Build.0 = Release|Any CPU
+		{6F2C2A9F-2EC9-4F0B-B4F2-BFF00949D691}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6F2C2A9F-2EC9-4F0B-B4F2-BFF00949D691}.Debug|x86.Build.0 = Debug|Any CPU
+		{6F2C2A9F-2EC9-4F0B-B4F2-BFF00949D691}.Release|x86.ActiveCfg = Release|Any CPU
+		{6F2C2A9F-2EC9-4F0B-B4F2-BFF00949D691}.Release|x86.Build.0 = Release|Any CPU
+		{E7F98569-2B7A-416F-9EBA-2BC4A42CE662}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E7F98569-2B7A-416F-9EBA-2BC4A42CE662}.Debug|x86.Build.0 = Debug|Any CPU
+		{E7F98569-2B7A-416F-9EBA-2BC4A42CE662}.Release|x86.ActiveCfg = Release|Any CPU
+		{E7F98569-2B7A-416F-9EBA-2BC4A42CE662}.Release|x86.Build.0 = Release|Any CPU
+		{FEABFCAA-CD87-403B-BB72-8678C0F66C64}.Debug|x86.ActiveCfg = Debug|x86
+		{FEABFCAA-CD87-403B-BB72-8678C0F66C64}.Debug|x86.Build.0 = Debug|x86
+		{FEABFCAA-CD87-403B-BB72-8678C0F66C64}.Release|x86.ActiveCfg = Release|x86
+		{FEABFCAA-CD87-403B-BB72-8678C0F66C64}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Bryan1Language.Console\Bryan1Language.csproj
+	EndGlobalSection
+EndGlobal

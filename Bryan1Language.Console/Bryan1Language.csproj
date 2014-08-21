@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{FEABFCAA-CD87-403B-BB72-8678C0F66C64}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Bryan1Language</RootNamespace>
+    <AssemblyName>Bryan1Language.Console</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ParseTreeWalker.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\Bryan1Language.Common\Bryan1Language.Common.csproj">
+      <Project>{09E3CE55-1405-4B7D-89BE-0DEC29D4C07F}</Project>
+      <Name>Bryan1Language.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bryan1Language.Compiler\Bryan1Language.Compiler.csproj">
+      <Project>{E7F98569-2B7A-416F-9EBA-2BC4A42CE662}</Project>
+      <Name>Bryan1Language.Compiler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bryan1Language.Lexer\Bryan1Language.Lexer.csproj">
+      <Project>{32C4A198-585F-45A5-A084-9987E74372A4}</Project>
+      <Name>Bryan1Language.Lexer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bryan1Language.Parser\Bryan1Language.Parser.csproj">
+      <Project>{6F2C2A9F-2EC9-4F0B-B4F2-BFF00949D691}</Project>
+      <Name>Bryan1Language.Parser</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
