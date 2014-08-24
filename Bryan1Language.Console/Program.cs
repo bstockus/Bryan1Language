@@ -9,50 +9,70 @@ using Bryan1Language.Common.Nodes;
 
 namespace Bryan1Language {
 
-	class MainClass {
+    class MainClass {
 
-		public static void Main(string[] args) {
+        public static void Main(string[] args) {
 
-			Console.WriteLine("Bryan1 Language");
+            Console.WriteLine("Bryan1 Language");
 
-			while (true) {
+            while (true) {
 
-				try {
-					Console.Write("> ");
-					string str = Console.ReadLine();
+                /*
+                Console.Write("> ");
+                string str = Console.ReadLine();
 
-					if (str.ToUpper() == "EXIT") break;
+                if (str.ToUpper() == "EXIT") break;
 
-					ILexer lexer = new BasicLexer();
+                ILexer lexer = new BasicLexer2();
 
-					List<Token> tokens = new List<Token>();
+                List<Token> tokens = new List<Token>();
 
-					foreach (Token t in lexer.Lex(str)) {
-						Console.Write(t.ToString() + " ");
-						tokens.Add(t);
-					}
+                foreach (Token t in lexer.Lex(str)) {
+                    Console.Write(t.ToString() + " ");
+                    tokens.Add(t);
+                }
 
-					Console.WriteLine();
+                Console.WriteLine();
+                */
 
-					IParser parser = new BasicParser();
+                
+                try {
+                    Console.Write("> ");
+                    string str = Console.ReadLine();
 
-					ProgramNode program = (ProgramNode)parser.Parse(tokens.ToArray());
+                    if (str.ToUpper() == "EXIT") break;
 
-					ParseTreeWalker ptw = new ParseTreeWalker();
+                    ILexer lexer = new BasicLexer2();
 
-					ptw.WalkAndPrintTree((Node)program);
-				} catch (Exception e) {
-					Console.WriteLine();
-					Console.WriteLine("ERROR: " + e.Message);
-				}
+                    List<Token> tokens = new List<Token>();
 
-			}
+                    foreach (Token t in lexer.Lex(str)) {
+                        Console.Write(t.ToString() + " ");
+                        tokens.Add(t);
+                    }
+
+                    Console.WriteLine();
+
+                    IParser parser = new BasicParser();
+
+                    ProgramNode program = (ProgramNode)parser.Parse(tokens.ToArray());
+
+                    ParseTreeWalker ptw = new ParseTreeWalker();
+
+                    ptw.WalkAndPrintTree((Node)program);
+                } catch (Exception e) {
+                    Console.WriteLine();
+                    Console.WriteLine("ERROR: " + e.Message);
+                }
+                
+
+            }
 
 
 
-			return;
+            return;
 
-		}
+        }
 
-	}
+    }
 }

@@ -30,7 +30,7 @@ namespace Bryan1Language.Common.Tokens {
 		}
 
 		public override string ToString() {
-			return string.Format("<{0}[{1}]>", this.Value.ToString(), this.Range.ToString());
+			return string.Format("<{0}>", this.Value.ToString());
 		}
 
 	}

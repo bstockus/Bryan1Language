@@ -31,7 +31,7 @@ namespace Bryan1Language.Common.Nodes {
 
 		public override string Name {
 			get {
-				return "";
+				return "VariableExpressionNode";
 			}
 		}
 

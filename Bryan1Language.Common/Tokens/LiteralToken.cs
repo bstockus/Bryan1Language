@@ -34,13 +34,13 @@ namespace Bryan1Language.Common.Tokens {
 		public override string ToString() {
 			switch (this.ValueType) {
 				case LiteralType.Float:
-					return string.Format("<FLOAT[{0}]: {1}>", this.Range.ToString(), this.Value);
+					return string.Format("<FLOAT: {0}>", this.Value);
 				case LiteralType.Integer:
-					return string.Format("<INT[{0}]: {1}>", this.Range.ToString(), this.Value);
+					return string.Format("<INT: {0}>", this.Value);
 				case LiteralType.String:
-					return string.Format("<STRING[{0}]: \'{1}\'>", this.Range.ToString(), this.Value);
+					return string.Format("<STRING: \'{0}\'>", this.Value);
 				case LiteralType.Unknown:
-					return string.Format("<UNKNOWN[{0}]: {1}>", this.Range.ToString(), this.Value);
+					return string.Format("<UNKNOWN: {0}>", this.Value);
 				default:
 					return "<>"; 
 			}

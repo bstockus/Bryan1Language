@@ -11,7 +11,7 @@ namespace Bryan1Language.Common.Tokens {
 		}
 
 		public override string ToString() {
-			return "<ID[" + this.Range.ToString() + "]: \'" + this.Value + "\'>";
+			return "<ID: \'" + this.Value + "\'>";
 		}
 
 	}

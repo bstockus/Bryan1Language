@@ -101,11 +101,13 @@ namespace Bryan1Language.Lexer {
             SymbolToken.Symbol.CloseBrace
         };
 
-        private static readonly Dictionary<char, char[]> LOOKAHEAD_SYMBOLS = new Dictionary<char, char[]> {
-            { '=', new char[] {'='} },
-            { '!', new char[] {'='} },
-            { '<', new char[] {'='} },
-            { '>', new char[] {'='} }
+        private const string DOUBLE_SYMBOLS = "=!<>";
+
+        private static readonly Dictionary<char, string> LOOKAHEAD_SYMBOLS = new Dictionary<char, string> {
+            { '=', "=" },
+            { '!', "=" },
+            { '<', "=" },
+            { '>', "=" }
         };
 
         #endregion
@@ -137,7 +139,7 @@ namespace Bryan1Language.Lexer {
 
         private Token NextToken() {
 
-            while (true) {
+            while (!this.IsEnd()) {
 
                 char c = this.CurrentChar();
 
@@ -157,14 +159,22 @@ namespace Bryan1Language.Lexer {
 
             }
 
+            return null;
+
         }
 
         private void ConsumerWhitespace() {
 
             this.Consume();
 
-            while (BasicLexer2.IsWhitespace(this.CurrentChar())) {
-                this.Consume();
+            while (!this.IsEnd()) {
+
+                if (BasicLexer2.IsWhitespace(this.CurrentChar())) {
+                    this.Consume();
+                } else {
+                    return;
+                }
+
             }
 
         }
@@ -176,7 +186,7 @@ namespace Bryan1Language.Lexer {
             string value = this.CurrentChar().ToString();
             this.Consume();
 
-            while (true) {
+            while (!this.IsEnd()) {
 
                 if (BasicLexer2.IsCharacter(this.CurrentChar())) {
                     value += this.CurrentChar().ToString();
@@ -220,7 +230,7 @@ namespace Bryan1Language.Lexer {
 
             bool isDecimal = false;
 
-            while (true) {
+            while (!this.IsEnd()) {
 
                 if (BasicLexer2.IsDigit(this.CurrentChar())) {
                     value += this.CurrentChar().ToString();
@@ -233,21 +243,44 @@ namespace Bryan1Language.Lexer {
                     break;
                 }
 
-                if (isDecimal) {
-                    return (Token)(new LiteralToken<double>(null, Double.Parse(value)));
-                } else {
-                    return (Token)(new LiteralToken<int>(null, int.Parse(value)));
-                }
-
             }
 
-            return null;
+            if (isDecimal) {
+                return (Token)(new LiteralToken<double>(null, Double.Parse(value)));
+            } else {
+                return (Token)(new LiteralToken<int>(null, int.Parse(value)));
+            }
+
         }
 
         private Token MatchSymbol() {
 
+            string value = this.CurrentChar().ToString();
 
-            return null;
+            if (BasicLexer2.IsMember(BasicLexer2.DOUBLE_SYMBOLS, this.CurrentChar())) {
+                if (!this.IsNextEnd()) {
+                    if (BasicLexer2.IsMember(BasicLexer2.LOOKAHEAD_SYMBOLS[this.CurrentChar()], this.NextChar())) {
+                        this.Consume();
+                        value += this.CurrentChar().ToString();
+                        this.Consume();
+                    } else {
+                        this.Consume();
+                    }
+                } else {
+                    this.Consume();
+                }
+                
+            } else {
+                this.Consume();
+            }
+
+            for (int index = 0; index < BasicLexer2.SYMBOLS.Length; index++) {
+                if (BasicLexer2.SYMBOLS[index] == value) {
+                    return (Token)(new SymbolToken(null, BasicLexer2.SYMBOL_VALUES[index]));
+                }
+            }
+
+            throw new Exception("Unrecognized symbol encountered");
         }
 
         private Token MatchQuote() {
@@ -257,12 +290,13 @@ namespace Bryan1Language.Lexer {
             string value = "";
             this.Consume();
 
-            while (true) {
+            while (!this.IsEnd()) {
 
                 if (!BasicLexer2.IsQuote(this.CurrentChar())) {
                     value += this.CurrentChar().ToString();
                     this.Consume();
                 } else {
+                    this.Consume();
                     break;
                 }
 
@@ -336,6 +370,10 @@ namespace Bryan1Language.Lexer {
         }
 
         private bool IsEnd() {
+            return ((this.position + 0) >= this.chars.Length);
+        }
+
+        private bool IsNextEnd() {
             return ((this.position + 1) >= this.chars.Length);
         }
 
