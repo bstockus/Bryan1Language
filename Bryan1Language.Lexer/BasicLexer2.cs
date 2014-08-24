@@ -137,29 +137,138 @@ namespace Bryan1Language.Lexer {
 
         private Token NextToken() {
 
-            return null;
+            while (true) {
+
+                char c = this.CurrentChar();
+
+                if (BasicLexer2.IsLetter(c)) {
+                    return this.MatchName();
+                } else if (BasicLexer2.IsDigit(c)) {
+                    return this.MatchNumber();
+                } else if (BasicLexer2.IsQuote(c)) {
+                    return this.MatchQuote();
+                } else if (BasicLexer2.IsSymbol(c)) {
+                    return this.MatchSymbol();
+                } else if (BasicLexer2.IsWhitespace(c)) {
+                    this.ConsumerWhitespace();
+                } else {
+                    throw new Exception("Unknown Character found in the input stream.");
+                }
+
+            }
+
+        }
+
+        private void ConsumerWhitespace() {
+
+            this.Consume();
+
+            while (BasicLexer2.IsWhitespace(this.CurrentChar())) {
+                this.Consume();
+            }
+
         }
 
         private Token MatchName() {
 
+            //Rule: Name -> <LETTER> (<CHARACTER>)?
 
+            string value = this.CurrentChar().ToString();
+            this.Consume();
 
+            while (true) {
+
+                if (BasicLexer2.IsCharacter(this.CurrentChar())) {
+                    value += this.CurrentChar().ToString();
+                    this.Consume();
+                } else {
+                    break;
+                }
+
+            }
+
+            Token token = (Token)this.MatchKeyword(value);
+
+            if (token == null) {
+                IdentifierToken idToken = new IdentifierToken(null, value);
+                return (Token)idToken;
+            } else {
+                return token;
+            }
+
+        }
+
+        private KeywordToken MatchKeyword(string value) {
+
+            for (uint index = 0; index < BasicLexer2.KEYWORDS.Length; index++) {
+
+                if (BasicLexer2.KEYWORDS[index].ToUpper().Equals(value.ToUpper())) {
+                    return new KeywordToken(null, BasicLexer2.KEYWORD_VALUES[index]);
+                }
+
+            }
+            
             return null;
         }
 
         private Token MatchNumber() {
+
+            //Rule: Number -> (<DIGIT>)* '.' (<DIGIT>)?
+
+            string value = this.CurrentChar().ToString();
+            this.Consume();
+
+            bool isDecimal = false;
+
+            while (true) {
+
+                if (BasicLexer2.IsDigit(this.CurrentChar())) {
+                    value += this.CurrentChar().ToString();
+                    this.Consume();
+                } else if (BasicLexer2.IsMember(".", this.CurrentChar()) && !isDecimal) {
+                    isDecimal = true;
+                    value += this.CurrentChar().ToString();
+                    this.Consume();
+                } else {
+                    break;
+                }
+
+                if (isDecimal) {
+                    return (Token)(new LiteralToken<double>(null, Double.Parse(value)));
+                } else {
+                    return (Token)(new LiteralToken<int>(null, int.Parse(value)));
+                }
+
+            }
 
             return null;
         }
 
         private Token MatchSymbol() {
 
+
             return null;
         }
 
         private Token MatchQuote() {
 
-            return null;
+            //Rule: Quote -> <QUOTE> (!<QUOTE>)* <QUOTE>
+
+            string value = "";
+            this.Consume();
+
+            while (true) {
+
+                if (!BasicLexer2.IsQuote(this.CurrentChar())) {
+                    value += this.CurrentChar().ToString();
+                    this.Consume();
+                } else {
+                    break;
+                }
+
+            }
+
+            return (Token)(new LiteralToken<string>(null, value));
         }
 
         #endregion
