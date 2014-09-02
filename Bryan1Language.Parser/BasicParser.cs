@@ -471,6 +471,9 @@ namespace Bryan1Language.Parser {
 
         #region Backtracking methods
 
+        
+        // This is just a template for the actual Speculate methods, not intended to be ever executed.
+        // TODO: Remove this when all Speculate methods have been implemented.
         private bool Speculate() {
             bool success = true;
             this.Mark();

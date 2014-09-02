@@ -5,3 +5,9 @@
 *.dll
 *.pdb
 *.exe
+*.manifest
+/Bryan1Language.Common/obj/Debug
+/Bryan1Language.Compiler/obj/Debug
+/Bryan1Language.Console/obj/x86/Debug
+/Bryan1Language.Lexer/obj/Debug
+/Bryan1Language.Parser/obj/Debug
